@@ -1,0 +1,16 @@
+JABM version 0.7
+----------------
+
+$Date: 2012-09-07 16:41:32 +0100 (Fri, 07 Sep 2012) $
+
+Main changes since the last release
+-----------------------------------
+
+This release is a major refactoring.  The main feature is completely new GUI
+which is based on a tabbed window manager provided by InfoNode Docking Windows 
+(http://www.infonode.net/index.html?idw).  To run JABM using the GUI there is a 
+new main class net.sourceforge.jabm.DesktopSimulationManager.
+
+
+
+ 
