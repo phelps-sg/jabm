@@ -180,7 +180,7 @@ public class AgentList implements Serializable {
 	}
 	
 	public int size() {
-		return this.size;
+		return this.agents.size();
 	}
 
 	public void setAgents(List<Agent> agents) {
