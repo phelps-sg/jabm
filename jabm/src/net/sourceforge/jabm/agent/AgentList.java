@@ -161,6 +161,7 @@ public class AgentList implements Serializable {
 	
 	public void add(Agent agent) {
 		agents.add(agent);
+		this.size++;
 	}	
 	
 	public boolean addAll(Collection<? extends Agent> c) {
