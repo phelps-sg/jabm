@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project jabm-examples">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/dist/jabm-0.8-with-libs.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="net.sourceforge.jabm.examples.elfarolbar.Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm-examples/bin"/>
+            <fileset dir="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/commons-collections-3.2.1/commons-collections-3.2.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/apache-log4j-1.2.16/log4j-1.2.16.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-3d-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/collections-generic-4.01.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-api-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/colt-1.2.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/concurrent-1.3.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-algorithms-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-visualization-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-3d-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-3d-demos-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-graph-impl-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-3d-demos-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-algorithms-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-api-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-graph-impl-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-io-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/wstx-asl-3.2.6.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/stax-api-1.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-io-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-jai-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-jai-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-jai-samples-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-samples-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-jai-samples-2.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-samples-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jung-2.0.1/jung-visualization-2.0.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/commons-logging-1.1.1/commons-logging-1.1.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/bsh-2.0b4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jfreechart-1.0.14/lib/jfreechart-1.0.14.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/jfreechart-1.0.14/lib/jcommon-1.0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/aopalliance.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/idw-gpl-1.6.1/lib/idw-gpl.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/pf-joi.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/pf.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/spring-framework-3.2.3.RELEASE/libs/spring-aop-3.2.3.RELEASE.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/spring-framework-3.2.3.RELEASE/libs/spring-beans-3.2.3.RELEASE.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/spring-framework-3.2.3.RELEASE/libs/spring-core-3.2.3.RELEASE.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/sphelps/eclipse_workspaces/jasa/jabm/jabm/lib/commons-math3-3.2/commons-math3-3.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/local/java/eclipse/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/local/java/eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        </jar>
+    </target>
+</project>

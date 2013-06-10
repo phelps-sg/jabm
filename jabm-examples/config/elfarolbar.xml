@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- A JABM simulation model of the El Farol Bar problem.  See
+
+	Arthur, W. B. (1994). Inductive Reasoning and Bounded Rationality. 
+	The American Economic Review , 84 (2), 406-411.
+		URL http://dx.doi.org/10.2307/2117868
+		
+ -->
+ 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+    <!--  Configure a simulation which we will run just the once -->
+	<bean id="simulationController" 
+	           class="net.sourceforge.jabm.SpringSimulationController">
+	    
+	    <!--  The number of independent simulations to run -->       
+		<property name="numSimulations" value="1" />
+		
+		<!--  This is the name of the bean representing the simulation.
+		         If we run the simulation more than once the bean will be 
+		         re-instantiated for each simulation run. -->
+		<property name="simulationBeanName">
+		      <idref local="repeatedSimulation" />
+		</property>
+		
+		<!--  Report objects collect data on the simulation runs.  
+		        Reports persist across simulation runs and are typically 
+		        singleton in scope allowing them to collect summary 
+		        statistics across different simulations. -->
+		<property name="reports">
+			<list>
+				<!--  The barTender report keeps current and historical
+				         statistics on attendance -->
+				<ref bean="barTender"/>
+				
+				<!--  Keep track of the execution frequency of each strategy -->
+				<ref bean="strategyExecutionFrequency"/>
+				
+				<!--  Log attendance to CSV files -->
+				<ref bean="attendanceCSVReport"/>
+				
+				<!-- Track statistics on predictions across rules to a CSV file-->
+				<ref bean="strategyCSVReport"/>
+				
+				<!--  Display a time series chart for execution frequency -->
+				<ref bean="executionFrequencyTimeseriesReport"/>
+				<ref bean="executionFrequencyTimeseriesChart"/>
+				<ref bean="executionFrequencyUpdater"/>
+				
+				<!--  Display a time series chart for attendance -->
+				<ref bean="attendanceTimeseriesReport"/>
+				<ref bean="attendanceTimeseriesChart"/>
+			</list>
+		</property>
+	</bean>
+
+    <!--  The El Farol Bar will be run as a repeated game with 500 rounds, 
+            each round representing a week in simulation time.
+           Note that this bean is defined as a prototype so that
+           when the simulation is run many times, we get a freshly
+           constructed simulation object on each run. -->
+    <bean id="repeatedSimulation" scope="simulation"
+           class="net.sourceforge.jabm.RepeatedInteractionSimulation">
+        <property name="maximumRounds" value="10000" />
+        <property name="population" ref="population" />
+        <property name="agentInitialiser" ref="agentInitialiser" />
+        <property name="agentMixer" ref="randomRobinAgentMixer" />
+        <property name="simulationController" ref="simulationController" />
+    </bean>
+    
+    <!--  Agents will arrive at the bar in a random order -->
+    <bean id="randomRobinAgentMixer" class="net.sourceforge.jabm.mixing.RandomRobinAgentMixer">
+    	<property name="prng" ref="prng"/>
+    </bean>
+    
+    <!--  The agent representing the bar tender -->
+	<bean id="barTender" scope="singleton" class="net.sourceforge.jabm.examples.elfarolbar.BarTender">
+	</bean>
+			
+	<bean id="attendanceTimeseriesChart" class="net.sourceforge.jabm.view.TimeSeriesChart">
+		<property name="series" ref="attendanceTimeseries"/>
+		<property name="chartTitle" value="Bar attendance"/>
+	</bean>
+	
+	<bean id="attendanceTimeseriesReport" class="net.sourceforge.jabm.report.InteractionIntervalReport">
+		<property name="reportVariables" ref="attendanceTimeseries">
+		</property>
+		<property name="sampleInterval" value="1" />
+	</bean>
+	
+	<bean id="attendanceTimeseries" class="net.sourceforge.jabm.report.SeriesReportVariables">
+		<property name="reportVariables" ref="barTender" />
+	</bean>
+	
+	<bean id="executionFrequencyTimeseriesChart" class="net.sourceforge.jabm.view.TimeSeriesChart">
+		<property name="series" ref="executionFrequencyTimeseries"/>
+		<property name="chartTitle" value="Strategy execution frequency (population)"/>
+	</bean>
+	
+	<bean id="executionFrequencyTimeseriesReport" class="net.sourceforge.jabm.report.InteractionIntervalReport">
+		<property name="reportVariables" ref="executionFrequencyTimeseries">
+		</property>
+		<property name="sampleInterval" value="10" />
+	</bean>
+	
+	<bean id="executionFrequencyTimeseries" class="net.sourceforge.jabm.report.SeriesReportVariables">
+		<property name="reportVariables" ref="strategyExecutionFrequency"/>
+	</bean>
+	
+	<bean id="executionFrequencyUpdater" class="net.sourceforge.jabm.report.FreshInteractionIntervalReport">
+		<property name="sampleInterval" value="1"/>
+		<property name="reportVariables" ref="strategyExecutionFrequency"/>
+	</bean>
+	
+	<!-- This report writes data on the frequency with which each strategy is executed
+			 to a comma-separated variables (CSV) file -->
+	<bean id="strategyCSVReport" scope="singleton" 
+			class="net.sourceforge.jabm.report.InteractionIntervalReport">
+			<!--  Sample data every week (1nce a week) -->
+			<property name="sampleInterval" value="1"/>
+			<property name="reportVariables">
+				<!-- Write the data to the following CSV file -->
+				<bean class="net.sourceforge.jabm.report.CSVReportVariables">
+					<property name="fileNamePrefix" value="data/strategy"/>
+					<property name="reportVariables" ref="strategyExecutionFrequency"/>
+				</bean>
+			</property>
+    </bean>       
+    
+    <!-- This report writes data on attendance levels
+			 to a comma-separated variables (CSV) file -->
+	<bean id="attendanceCSVReport" scope="singleton" 
+			class="net.sourceforge.jabm.report.InteractionIntervalReport">
+			<!--  Sample data every week (1nce a week) -->
+			<property name="sampleInterval" value="1"/>
+			<property name="reportVariables">
+				<!-- Write the data to the following CSV file -->
+				<bean class="net.sourceforge.jabm.report.CSVReportVariables">
+					<property name="fileNamePrefix" value="data/attendance"/>
+					<property name="reportVariables" ref="barTender"/>
+				</bean>
+			</property>
+    </bean>       
+    
+    <bean id ="strategyExecutionFrequency" scope="singleton"
+    	class="net.sourceforge.jabm.report.StrategyExecutionFrequency">
+    	<property name="keyList">
+    		<list>
+    			<ref bean="autoRegressivePredictionStrategy"/>
+    			<ref bean="laggedPredictionStrategy"/>
+    			<ref bean="contrarianPredictionStrategy"/>
+    			<ref bean="antiContrarianPredictionStrategy"/>
+    			<ref bean="constantPredictionStrategy"/>
+    			<ref bean="movingAveragePredictionStrategy"/>
+    			<ref bean="exponentialMovingAveragePredictionStrategy"/>
+    		</list>
+    	</property>
+    </bean>
+
+	<!-- The population consists of 100 patrons -->
+	<bean id="population" scope="simulation" 
+			class="net.sourceforge.jabm.Population">
+	
+		<property name="agentList">
+			<bean class="net.sourceforge.jabm.agent.AgentList"
+				init-method="populateFromFactory">
+				<property name="size" value="100"/>
+				<property name="agentFactory">
+					<bean
+						class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+						<property name="targetBeanName">
+						<idref local="patronAgent" />
+					</property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="prng" ref="prng" />
+	</bean>
+
+    <!--  The prototype used to manufacture patron agents -->
+	<bean id="patronAgent" scope="prototype"
+		class="net.sourceforge.jabm.examples.elfarolbar.PatronAgent">
+		<property name="strategy" ref="adaptivePredictionStrategy" />
+		<property name="barCapacity" value="60" />
+		<property name="scheduler" ref="simulationController" />
+	</bean>
+
+	<!--  A prediction strategy which selects from amongst many
+	         sub-strategies by tracking the forecast error of every
+	         strategy in the set.  -->
+	<bean id="adaptivePredictionStrategy" parent="abstractPredictionStrategy" scope="prototype"
+	       class="net.sourceforge.jabm.examples.elfarolbar.AdaptivePredictionStrategy">
+	   <!--  The number of sub-strategies to use -->
+	   <property name="numRules" value="20"/>
+	   <!--  The factory used to construct each of these 25 rules -->
+	   <property name="ruleFactory" ref="ruleFactory"/>	   
+	   <property name="prng" ref="prng"/>
+	</bean>
+	
+    <!--  A factory which manufactures a combination of different 
+              prediction strategies for use by an adaptivePredictionStrategy -->
+	<bean id="ruleFactory" class="net.sourceforge.jabm.util.CombiObjectFactory"
+	scope="prototype">
+	
+		<!-- We will use a combination of the following rules -->
+		<property name="factoryMap">
+			
+			<map>
+		
+				<entry>
+					<key>
+						<bean scope="prototype"
+							class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+							<property name="targetBeanName">
+								<idref local="movingAveragePredictionStrategy" />
+							</property>
+						</bean>
+					</key>
+					
+					<value>5</value>
+				</entry>
+
+				<entry>
+					<key>
+						<bean scope="prototype"
+							class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+							<property name="targetBeanName">
+								<idref local="autoRegressivePredictionStrategy" />
+							</property>
+						</bean>
+					</key>
+					
+					<value>5</value>
+				</entry>
+
+				<entry>
+					<key>
+						<bean scope="prototype"
+							class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+							<property name="targetBeanName">
+								<idref local="exponentialMovingAveragePredictionStrategy" />
+							</property>
+						</bean>
+					</key>
+			
+					<value>5</value>
+				</entry>														
+			
+				<entry>
+					<key>
+						<bean scope="prototype"
+							class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+							<property name="targetBeanName">
+								<idref local="contrarianPredictionStrategy" />
+							</property>
+						</bean>
+					</key>
+					
+					<value>0</value>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean scope="prototype"
+							class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+							<property name="targetBeanName">
+								<idref local="antiContrarianPredictionStrategy" />
+							</property>
+						</bean>
+					</key>
+					
+					<value>5</value>
+				</entry>
+					
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="abstractPredictionStrategy" scope="prototype"
+			class="net.sourceforge.jabm.examples.elfarolbar.AbstractPredictionStrategy">
+		<property name="recency" value="0.95"/>
+		<property name="barTender" ref="barTender"/>
+		<property name="scheduler" ref="simulationController"/>
+	</bean>
+	
+	<bean id="lowHighPredictionStrategy" scope="prototype" 
+			parent="abstractPredictionStrategy" class="net.sourceforge.jabm.examples.elfarolbar.AntiContrarianPredictionStrategy">
+		<property name="low">
+			<bean class="net.sourceforge.jabm.spring.RandomIntegerFactoryBean">
+				<property name="distribution">
+					<bean class="cern.jet.random.Uniform">
+						<constructor-arg value="0" />
+						<constructor-arg value="59" />
+						<constructor-arg ref="prng" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="high">
+			<bean class="net.sourceforge.jabm.spring.RandomIntegerFactoryBean">
+				<property name="distribution">
+					<bean class="cern.jet.random.Uniform">
+						<constructor-arg value="60" />
+						<constructor-arg value="100" />
+						<constructor-arg ref="prng" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="lag" value="1" />		
+	</bean>
+
+	<bean id="contrarianPredictionStrategy" scope="prototype"
+		parent="lowHighPredictionStrategy"
+		class="net.sourceforge.jabm.examples.elfarolbar.ContrarianPredictionStrategy">
+	</bean>
+	
+	<bean id="antiContrarianPredictionStrategy" scope="prototype"
+		parent="lowHighPredictionStrategy"
+		class="net.sourceforge.jabm.examples.elfarolbar.AntiContrarianPredictionStrategy">
+	</bean>
+
+	<bean id="laggedPredictionStrategy" scope="prototype"
+		parent="abstractPredictionStrategy"
+		class="net.sourceforge.jabm.examples.elfarolbar.LaggedPredictionStrategy">
+		<property name="lag">
+			<bean class="net.sourceforge.jabm.spring.RandomDoubleFactoryBean">
+				<property name="distribution">
+					<bean class="cern.jet.random.Uniform">
+						<constructor-arg value= "1.0" />
+						<constructor-arg value="5.0" />
+						<constructor-arg ref="prng" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="autoRegressivePredictionStrategy" scope="prototype"
+			parent="abstractPredictionStrategy"
+	       class="net.sourceforge.jabm.examples.elfarolbar.AutoregressivePredictionStrategy">
+ 		<property name="windowSize" ref="drawFromWindowSizeDistribution"/>
+        <property name="coefficientDistribution">
+            <bean class="cern.jet.random.Uniform">
+                <constructor-arg value="-1.0"/>
+                <constructor-arg value="+1.0"/>
+                <constructor-arg ref="prng"/>
+            </bean>
+        </property>
+        <property name="offsetDistribution">
+        	<bean class="cern.jet.random.Uniform">
+                <constructor-arg value="0"/>
+                <constructor-arg value="1.0"/>
+                <constructor-arg ref="prng"/>
+            </bean>
+        </property>
+	</bean>
+	
+	<bean id="movingAveragePredictionStrategy" parent="abstractPredictionStrategy"
+		scope="prototype"
+		class="net.sourceforge.jabm.examples.elfarolbar.MovingAveragePredictionStrategy">
+		<property name="windowSize" ref="drawFromWindowSizeDistribution" />
+	</bean>
+	
+	<bean id="exponentialMovingAveragePredictionStrategy" scope="prototype"
+		   parent="abstractPredictionStrategy"
+	       class="net.sourceforge.jabm.examples.elfarolbar.ExponentialMovingAveragePredictionStrategy">
+        <property name="alpha">
+        	<bean class="net.sourceforge.jabm.spring.RandomDoubleFactoryBean">
+				<property name="distribution">
+					<bean class="cern.jet.random.Uniform">
+						<constructor-arg value= "0.01" />
+						<constructor-arg value="0.99" />
+						<constructor-arg ref="prng" />
+					</bean>
+				</property>
+			</bean>
+        </property>
+	</bean>
+	
+	<bean id="constantPredictionStrategy" scope="prototype"
+			parent="abstractPredictionStrategy"
+	       	class="net.sourceforge.jabm.examples.elfarolbar.ConstantPredictionStrategy">       
+        <property name="prediction">
+        	<bean class="net.sourceforge.jabm.spring.RandomDoubleFactoryBean">
+				<property name="distribution">
+					<bean class="cern.jet.random.Uniform">
+						<constructor-arg value= "0" />
+						<constructor-arg value="100.0" />
+						<constructor-arg ref="prng" />
+					</bean>
+				</property>
+			</bean>
+        </property>
+	</bean>
+
+	<bean id="agentInitialiser"
+	    class="net.sourceforge.jabm.init.BasicAgentInitialiser">
+	</bean>
+
+    <!--  The Pseudo-Random Number Generator (PRNG) algorithm used in the
+              simulation -->
+	<bean id="prng" scope="singleton" 
+		class="cern.jet.random.engine.MersenneTwister64">
+		<constructor-arg>
+			<bean class="java.util.Date" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- This bean generates random numbers from the specified distribution
+	         in order to set the windowSize property of various strategies -->
+	<bean id="drawFromWindowSizeDistribution" 
+			class="net.sourceforge.jabm.spring.RandomDoubleFactoryBean">
+		<property name="distribution">
+			<bean class="cern.jet.random.Uniform">
+				<constructor-arg value="1.0"/>
+				<constructor-arg value="50.0"/>
+				<constructor-arg ref="prng"/>
+			</bean>
+		</property>
+	</bean>
+
+</beans>
+ 
