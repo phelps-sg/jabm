@@ -25,7 +25,6 @@ import net.sourceforge.jabm.event.AgentArrivalEvent;
 import net.sourceforge.jabm.event.SimEvent;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Required;
 
 /**
  * Every pair of agents interacts with each other.

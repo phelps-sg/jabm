@@ -14,10 +14,8 @@
  */
 package net.sourceforge.jabm.report;
 
-import net.sourceforge.jabm.event.BatchFinishedEvent;
 import net.sourceforge.jabm.event.SimEvent;
 import net.sourceforge.jabm.event.SimulationFinishedEvent;
-import net.sourceforge.jabm.event.SimulationStartingEvent;
 
 import org.apache.log4j.Logger;
 

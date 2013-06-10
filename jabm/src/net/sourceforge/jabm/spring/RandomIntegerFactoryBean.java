@@ -15,9 +15,6 @@
 package net.sourceforge.jabm.spring;
 
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.annotation.Required;
-
-import cern.jet.random.AbstractContinousDistribution;
 
 /**
  * <p>

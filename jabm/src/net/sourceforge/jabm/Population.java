@@ -21,9 +21,6 @@ import net.sourceforge.jabm.agent.Agent;
 import net.sourceforge.jabm.agent.AgentList;
 import net.sourceforge.jabm.event.EventListener;
 import net.sourceforge.jabm.event.SimEvent;
-
-import org.springframework.beans.factory.ObjectFactory;
-
 import cern.jet.random.Uniform;
 import cern.jet.random.engine.RandomEngine;
 
