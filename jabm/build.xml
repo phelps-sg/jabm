@@ -6,13 +6,7 @@
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="jabm">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../../../usr/local/java/eclipse"/>
-    <property name="imagescore.location" value="../../imagescore"/>
-    <property name="imagescore-pairwise.location" value="../../imagescore-pairwise"/>
-    <property name="jabm-examples.location" value="../../../../git/jabm-examples/jabm-examples"/>
-    <property name="jasa.location" value="../../jasa"/>
-    <property name="jasa-research.location" value="../../jasa-research"/>
-    <property name="yvan.location" value="../../yvan"/>
-    <property name="debuglevel" value="source,lines,vars"/>
+   <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
     <import file="jabm.xml"/>

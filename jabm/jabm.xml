@@ -2,7 +2,7 @@
 	
 <project basedir="." name="jabm-user">
 
-	<property name="version" value="0.7"/>
+	<property name="version" value="0.8"/>
 	
 	<target name="jar">
 		<jar destfile="dist/jabm-${version}.jar">
