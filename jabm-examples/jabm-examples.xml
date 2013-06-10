@@ -1,0 +1,13 @@
+ <?eclipse.ant.import?>
+	
+<project basedir="." name="jabm-user">
+
+ <target name="elfarolbar.xml">
+        <java classname="net.sourceforge.jabm.DesktopSimulationManager" failonerror="true" fork="yes">
+            <jvmarg line="-ea -server -Djabm.config=config/elfarolbar.xml -Djabm.propertyfile=config/experiment.properties"/>
+            <classpath refid="jabm-examples.classpath"/>
+        </java>
+        
+ </target>
+ 
+ </project>
