@@ -8,8 +8,7 @@
     <property name="ECLIPSE_HOME" value="../../../../../../usr/local/java/eclipse"/>
     <property name="imagescore.location" value="../../imagescore"/>
     <property name="imagescore-pairwise.location" value="../../imagescore-pairwise"/>
-    <property name="jabm-examples.location" value="../../../../git/jabm-examples/jabm-examples"/>
-    <property name="jasa.location" value="../../jasa"/>
+    <property name="jabm-examples.location" value="../jabm-examples"/>
     <property name="jasa-research.location" value="../../jasa-research"/>
     <property name="yvan.location" value="../../yvan"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -105,12 +104,6 @@
         </ant>
         <ant antfile="build.xml" dir="${jabm-examples.location}" inheritAll="false" target="clean"/>
         <ant antfile="build.xml" dir="${jabm-examples.location}" inheritAll="false" target="build">
-            <propertyset>
-                <propertyref name="build.compiler"/>
-            </propertyset>
-        </ant>
-        <ant antfile="build.xml" dir="${jasa.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${jasa.location}" inheritAll="false" target="build">
             <propertyset>
                 <propertyref name="build.compiler"/>
             </propertyset>
