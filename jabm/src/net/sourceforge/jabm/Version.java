@@ -18,8 +18,8 @@ public class Version {
 
 	public static final String VERSION_NUMBER = "0.8";
 	public static final String VERSION_SUFFIX = "b";
-	public static final String BUILD_NUMBER = "0";
-	public static final String BUILD_DATE = "20130610";
+	public static final String BUILD_NUMBER = "1";
+	public static final String BUILD_DATE = "20130615";
 	public static final String COPYRIGHT = "(C) 2013 Steve Phelps";
 	
 	public static String getVersion() {
