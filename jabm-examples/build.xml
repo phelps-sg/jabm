@@ -5,8 +5,8 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="jabm-examples">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../../../usr/local/java/eclipse"/>
-    <property name="jabm.location" value="../../../eclipse_workspaces/jasa/jabm/jabm"/>
+    <property name="ECLIPSE_HOME" value="../../../../../../usr/local/java/eclipse"/>
+    <property name="jabm.location" value="../jabm"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
@@ -112,6 +112,11 @@
         <antcall target="build"/>
     </target>
     <target name="Main">
+        <java classname="net.sourceforge.jabm.examples.elfarolbar.Main" failonerror="true" fork="yes">
+            <classpath refid="jabm-examples.classpath"/>
+        </java>
+    </target>
+    <target name="elfarolbar">
         <java classname="net.sourceforge.jabm.examples.elfarolbar.Main" failonerror="true" fork="yes">
             <classpath refid="jabm-examples.classpath"/>
         </java>
