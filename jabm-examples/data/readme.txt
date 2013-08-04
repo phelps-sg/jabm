@@ -1,0 +1,1 @@
+This directory is used for storing output from simulations runs in CSV format.

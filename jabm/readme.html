@@ -8,9 +8,9 @@
 	<h1>README for JABM - Java Agent-Based Modelling framework</h1>
 
 	<p>
-		(C) 2012 <a href="http://sphelps.net/">Steve Phelps</a> <br>
-		$Date: 2012-09-07 16:41:32 +0100 (Fri, 07 Sep 2012) $<br>
-		$Revision: 298 $<br>
+		(C) 2013 <a href="http://sphelps.net/">Steve Phelps</a> <br>
+	</p>
+	
 	<H2>Overview</H2>
 
 	<P>
@@ -36,7 +36,7 @@
 
 	JABM requires
 	<a href="http://www.java.com/en/download/index.jsp">Java version 6
-		or later</A>. It has been tested against version 1.6.0_35 and 1.7.0_07.
+		or later</A>. It has been tested against version 1.6.0_35 and 1.7.0_21.
 
 	<H2>Running the examples</H2>
 
@@ -70,8 +70,8 @@
 		directory and use a command similar to the following:
 	</P>
 
-	<code> java -Djabm.config=config/elfarolbar.xml
-		net.sourceforge.jabm.DesktopSimulationManager </code>
+	<code>java -Djabm.config=config/elfarolbar.xml
+		net.sourceforge.jabm.DesktopSimulationManager</code>
 
 	<h3>From the Eclipse IDE</h3>
 
@@ -81,8 +81,8 @@
 			href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/tasks-importproject.htm">File/Import</a>
 		menu item. Create a <a
 			href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.jdt.doc.user/tasks/tasks-java-local-configuration.htm">launch
-			configuration</a> with the main class
-		<code>net.sourceforge.jabm.SimulationExperiment</code>
+			configuration</a> in the <code>jabm-examples</code> project with the main class
+		<code>net.sourceforge.jabm.DesktopSimulationManager</code>
 		and specify which configuration file you want to use by setting the
 		system property
 		<code>jabm.config</code>

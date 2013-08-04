@@ -1,16 +1,16 @@
-JABM version 0.7
+JABM version 0.8
 ----------------
-
-$Date: 2012-09-07 16:41:32 +0100 (Fri, 07 Sep 2012) $
 
 Main changes since the last release
 -----------------------------------
 
-This release is a major refactoring.  The main feature is completely new GUI
-which is based on a tabbed window manager provided by InfoNode Docking Windows 
-(http://www.infonode.net/index.html?idw).  To run JABM using the GUI there is a 
-new main class net.sourceforge.jabm.DesktopSimulationManager.
-
+- repository migrated to github
+- additional javadoc
+- empirical game-theoretic analysis is now implemented by 
+	GameTheoreticSimulationController
+- Population no longer maintains a size attribute; this is handled soley
+	by AgentList
+- updated to latest version of 3rd-party libraries: commons-math 3.2 and Spring 3.2.3
 
 
  

@@ -1,6 +1,6 @@
 /*
  * JABM - Java Agent-Based Modeling Toolkit
- * Copyright (C) 2011 Steve Phelps
+ * Copyright (C) 2013 Steve Phelps
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -180,7 +180,7 @@ public class AgentList implements Serializable {
 	}
 	
 	public int size() {
-		return this.size;
+		return this.agents.size();
 	}
 
 	public void setAgents(List<Agent> agents) {
