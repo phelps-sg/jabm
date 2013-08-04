@@ -15,8 +15,10 @@ import org.apache.commons.collections15.Transformer;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.log4j.Logger;
 
+import edu.uci.ics.jung.algorithms.metrics.TriadicCensus;
 import edu.uci.ics.jung.algorithms.shortestpath.DistanceStatistics;
 import edu.uci.ics.jung.algorithms.shortestpath.UnweightedShortestPath;
+import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.Graph;
 
 public class WeightedGraphMetrics extends AbstractReportVariables {
@@ -34,6 +36,8 @@ public class WeightedGraphMetrics extends AbstractReportVariables {
 	protected HashMap<Agent,Integer> inDegreeByAgent;
 	
 	protected HashMap<Agent, Integer> outDegreeByAgent;
+	
+	protected long[] triadCounts;
 	
 	protected double diameter;
 	
@@ -60,22 +64,15 @@ public class WeightedGraphMetrics extends AbstractReportVariables {
 									clusteringStats);
 		result.put("averagePathLength", this.averagePathLength);
 		result.put("diameter", this.diameter);
-//		LinkedList<Agent> agents = new LinkedList<Agent>(inDegreeByAgent.keySet());
+//		LinkedList<Agent> agents = 
+//			new LinkedList<Agent>(vertexStrengthByAgent.keySet());
 //		Collections.sort(agents, new HashCodeComparator<Agent>());
-//		for(Agent agent : agents) {
-//			double degree = inDegreeByAgent.get(agent)
-//					+ outDegreeByAgent.get(agent);
-//			result.put("agent" + agent.hashCode(), degree);
+//		for (Agent agent : agents) {
+//			result.put("agent" + agent.hashCode(), inDegreeByAgent.get(agent)
+//					+ outDegreeByAgent.get(agent));
 //		}
-		LinkedList<Agent> agents = 
-			new LinkedList<Agent>(vertexStrengthByAgent.keySet());
-		Collections.sort(agents, new HashCodeComparator<Agent>());
-		for (Agent agent : agents) {
-			// if (! (agent.getStrategy() instanceof
-			// ImageScoreWeightedStrategy)) {
-			result.put("agent" + agent.hashCode(), inDegreeByAgent.get(agent)
-					+ outDegreeByAgent.get(agent));
-			// }
+		for(int i=0; i<16; i++) {
+			result.put("triad" + i, this.triadCounts[i]);
 		}
 		return result;
 	}
@@ -87,6 +84,7 @@ public class WeightedGraphMetrics extends AbstractReportVariables {
 		computeDegreeStats();
 		computeDiameter();
 		computeAveragePathLength();
+		computeTriads();
 	}
 	
 	public Graph<Agent, WeightedEdge> getGraph() {
@@ -140,6 +138,12 @@ public class WeightedGraphMetrics extends AbstractReportVariables {
 						+ clusteringCoefficient);
 			}
 		}
+	}
+	
+	public void computeTriads() {
+		this.triadCounts = 
+				TriadicCensus.getCounts(
+						(DirectedGraph<Agent, WeightedEdge>) getGraph());
 	}
 	
 	public double outDegree(Agent vertex) {
