@@ -59,7 +59,7 @@ public class RandomArrivalAgentMixer implements AgentMixer, Serializable {
 
 	public void invokeInteractions(AgentList group,
 			SimulationController simulation) {
-		if (prng.nextDouble() <= arrivalProbability) {
+		if (group.size() > 0 && prng.nextDouble() <= arrivalProbability) {
 			int n = group.size() - 1;
 			int agentIndex = (int) Math.round(prng.nextDouble() * n);
 			Agent agent = group.get(agentIndex);
