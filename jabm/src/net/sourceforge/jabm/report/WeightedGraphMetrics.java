@@ -37,7 +37,7 @@ public class WeightedGraphMetrics extends AbstractReportVariables {
 	
 	protected HashMap<Agent, Integer> outDegreeByAgent;
 	
-	protected long[] triadCounts;
+	protected long[] triadCounts = new long[16];
 	
 	protected double diameter;
 	

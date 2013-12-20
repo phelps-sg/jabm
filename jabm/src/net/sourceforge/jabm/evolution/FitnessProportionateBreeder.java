@@ -59,14 +59,14 @@ public class FitnessProportionateBreeder implements Breeder {
 		
 		double[] cummulativeFitnesses = cummulativeFitnesses(currentGeneration);
 		
-		if (totalFitness > 0 && !Double.isNaN(totalFitness)
+		if (!Double.isNaN(totalFitness)
 				&& !Double.isInfinite(totalFitness)) {
 			for (int i = 0; i < n; i++) {
 				int j = choose(cummulativeFitnesses);
 				reproduce(nextGeneration.get(i), currentGeneration.get(j));
 			}
 		} else {
-			logger.warn("Not reproducing because total fitness is zero");
+			logger.warn("Not reproducing because fitness is undefined");
 		}
 		
 		return nextGeneration;
@@ -103,11 +103,16 @@ public class FitnessProportionateBreeder implements Breeder {
 	}
 	
 	public double getFitness(Agent i) {
+        double result = 0.0;
 		if (fitnessFunction != null) {
-			return fitnessFunction.getFitness(i);
+			result = fitnessFunction.getFitness(i);
 		} else {
-			return i.getPayoff();
+			result = i.getPayoff();
 		}
+        if (result < 0.0) {
+            result = 0.0;
+        }
+        return result;
 	}
 
 	public FitnessFunction getFitnessFunction() {
