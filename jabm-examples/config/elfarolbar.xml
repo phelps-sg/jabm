@@ -283,7 +283,7 @@
 	
 	<bean id="abstractPredictionStrategy" scope="prototype"
 			class="net.sourceforge.jabm.examples.elfarolbar.AbstractPredictionStrategy">
-		<property name="recency" value="0.95"/>
+		<property name="recency" value="0.15"/>
 		<property name="barTender" ref="barTender"/>
 		<property name="scheduler" ref="simulationController"/>
 	</bean>
