@@ -1,104 +1,65 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
-<HTML>
-<HEAD>
-<TITLE>README for JABM - Java Agent-Based Modelling framework</TITLE>
-</HEAD>
-<BODY>
+<h1>README for JABM - Java Agent-Based Modelling framework</h1>
 
-	<h1>README for JABM - Java Agent-Based Modelling framework</h1>
+<p>(C) 2013 <a href="http://sphelps.net/">Steve Phelps</a> \</p>
 
-	<p>
-		(C) 2013 <a href="http://sphelps.net/">Steve Phelps</a> <br>
-	</p>
-	
-	<H2>Overview</H2>
+<h2>Overview</h2>
 
-	<P>
-		JABM is a Java framework for building agent-based simulation models. A
-		simulation model is constructed using <a
-			HREF="http://martinfowler.com/articles/injection.html">dependency
-			injection</a> by creating a <a
-			HREF="http://unmaintainable.wordpress.com/2007/11/01/configuration-with-spring-beans/">
-			Spring beans configuration file</a> which specifies which classes to use
-		in the simulation and the values of any attributes (parameters). The
-		Spring configuration file is specified using the system property
-		<code>jabm.config</code>
-		.
-	</p>
+<p>JABM is a Java framework for building agent-based simulation models. A
+simulation model is constructed using <a href="http://martinfowler.com/articles/injection.html">dependency
+injection</a> by creating
+a <a href="http://unmaintainable.wordpress.com/2007/11/01/configuration-with-spring-beans/">Spring beans configuration
+file</a>
+which specifies which classes to use in the simulation and the values of
+any attributes (parameters). The Spring configuration file is specified
+using the system property <code>jabm.config</code> .</p>
 
-	<p>
-		The main application class is <a
-			href="doc/javadoc/net/sourceforge/jabm/DesktopSimulationManager.html">
-			<code>DesktopSimulationManager</code></a>.
-	</p>
+<p>The main application class is
+<a href="doc/javadoc/net/sourceforge/jabm/DesktopSimulationManager.html"><code>DesktopSimulationManager</code></a>.</p>
 
-	<H2>Prerequisites</H2>
+<h2>Prerequisites</h2>
 
-	JABM requires
-	<a href="http://www.java.com/en/download/index.jsp">Java version 6
-		or later</A>. It has been tested against version 1.6.0_35 and 1.7.0_21.
+<p>JABM requires <a href="http://www.java.com/en/download/index.jsp">Java version 6 or
+later</a>. It has been tested
+against version 1.6.0_35 and 1.7.0_21.</p>
 
-	<H2>Running the examples</H2>
+<h2>Running the examples</h2>
 
-	<h3>Using Apache Ant</h3>
-	<P>
-		The examples can be run using <A href="ant.apache.org">Apache Ant</A>.
-		Launch a command window or shell and set your working directory to the
-		<code>jabm-examples/</code>
-		subdirectory. Next <a href="http://ant.apache.org/manual/running.html">run
-			ant</a> and pass it the argument
-		</code>
-		elfarolbar
-		</code>
-		in order to run the El Farol Bar example. For example:
-	</P>
+<h3>Using Apache Ant</h3>
 
-	<code> ant elfarolbar </code>
+<p>The examples can be run using <a href="ant.apache.org">Apache Ant</a>. Launch a
+command window or shell and set your working directory to the
+<code>jabm-examples/</code> subdirectory. Next <a href="http://ant.apache.org/manual/running.html">run
+ant</a> and pass it the argument
+elfarolbar in order to run the El Farol Bar example. For example:</p>
 
-	<h3>From the command line</h3>
+<p><code>ant elfarolbar</code></p>
 
-	<P>
-		Alternatively, configure the <a
-			href="http://download.oracle.com/javase/tutorial/essential/environment/paths.html">CLASSPATH</a>
+<h3>From the command line</h3>
 
-		environment variable to include all the
-		<code>jar</code>
-		files in the
-		<code>lib/</code>
-		directory and the
-		<code>dist/</code>
-		directory and use a command similar to the following:
-	</P>
+<p>Alternatively, configure the
+<a href="http://download.oracle.com/javase/tutorial/essential/environment/paths.html">CLASSPATH</a>
+environment variable to include all the <code>jar</code> files in the <code>lib/</code>
+directory and the <code>dist/</code> directory and use a command similar to the
+following:</p>
 
-	<code>java -Djabm.config=config/elfarolbar.xml
-		net.sourceforge.jabm.DesktopSimulationManager</code>
+<p><code>java -Djabm.config=config/elfarolbar.xml         net.sourceforge.jabm.DesktopSimulationManager</code></p>
 
-	<h3>From the Eclipse IDE</h3>
+<h3>From the Eclipse IDE</h3>
 
-	<P>
-		The distribution archive can be imported directly into the <a
-			href="http://www.eclipse.org/">Eclipse IDE</a> by using the <a
-			href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/tasks-importproject.htm">File/Import</a>
-		menu item. Create a <a
-			href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.jdt.doc.user/tasks/tasks-java-local-configuration.htm">launch
-			configuration</a> in the <code>jabm-examples</code> project with the main class
-		<code>net.sourceforge.jabm.DesktopSimulationManager</code>
-		and specify which configuration file you want to use by setting the
-		system property
-		<code>jabm.config</code>
-		using the JVM argument
-		<code>-D</code>
-		, for example
-	</P>
+<p>The distribution archive can be imported directly into the <a href="http://www.eclipse.org/">Eclipse
+IDE</a> by using the
+<a href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/tasks-importproject.htm">File/Import</a>
+menu item. Create a <a href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.jdt.doc.user/tasks/tasks-java-local-configuration.htm">launch
+configuration</a>
+in the <code>jabm-examples</code> project with the main class
+<code>net.sourceforge.jabm.DesktopSimulationManager</code> and specify which
+configuration file you want to use by setting the system property
+<code>jabm.config</code> using the JVM argument <code>-D</code> , for example</p>
 
-	<code>-Djabm.config=config/elfarolbar.xml</code>
+<p><code>-Djabm.config=config/elfarolbar.xml</code></p>
 
-	<H2>Documentation</H2>
+<h2>Documentation</h2>
 
-	<ul>
-		<li><a href="doc/javadoc/index.html">Javadoc and UML</a></li>
-	</ul>
-
-</BODY>
-
-</HTML>
+<ul>
+<li><a href="doc/javadoc/index.html">Javadoc and UML</a></li>
+</ul>
