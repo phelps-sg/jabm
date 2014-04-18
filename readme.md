@@ -1,5 +1,5 @@
-JABM - Java Agent-Based Modelling framework
-===========================================
+JABM - Java Agent-Based Modelling toolkit 
+=========================================
 
 \(C) 2014 [Steve Phelps](http://sphelps.net/)   
 
