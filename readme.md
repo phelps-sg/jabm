@@ -1,7 +1,7 @@
 README for JABM - Java Agent-Based Modelling framework
 ======================================================
 
-\(C) 2013 [Steve Phelps](http://sphelps.net/) \
+\(C) 2014 [Steve Phelps](http://sphelps.net/)   
 
 Overview
 --------
@@ -23,7 +23,7 @@ Prerequisites
 
 JABM requires [Java version 6 or
 later](http://www.java.com/en/download/index.jsp). It has been tested
-against version 1.6.0\_35 and 1.7.0\_21.
+against version 1.6.0\_35 and 1.7.0\_51.
 
 Running the examples
 --------------------
