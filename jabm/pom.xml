@@ -5,16 +5,16 @@
   <name>jabm</name>
   <description>Java Agent-Based Modelling Toolkit</description>
   <build>
-    <sourceDirectory>src/main</sourceDirectory>
-    <testSourceDirectory>src/test</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
+<!--     <sourceDirectory>src/main</sourceDirectory> -->
+<!--     <testSourceDirectory>src/test</testSourceDirectory> -->
+<!--     <resources> -->
+<!--       <resource> -->
+<!--         <directory>src</directory> -->
+<!--         <excludes> -->
+<!--           <exclude>**/*.java</exclude> -->
+<!--         </excludes> -->
+<!--       </resource> -->
+<!--     </resources> -->
     <plugins>
      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
