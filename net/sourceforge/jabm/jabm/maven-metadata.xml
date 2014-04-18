@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>net.sourceforge.jabm</groupId>
+  <artifactId>jabm</artifactId>
+  <versioning>
+    <versions>
+      <version>0.9.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20140418121614</lastUpdated>
+  </versioning>
+</metadata>
