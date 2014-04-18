@@ -5,8 +5,8 @@
   <name>jabm</name>
   <description>Java Agent-Based Modelling Toolkit</description>
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>test</testSourceDirectory>
+    <sourceDirectory>src/main</sourceDirectory>
+    <testSourceDirectory>src/test</testSourceDirectory>
     <resources>
       <resource>
         <directory>src</directory>
@@ -137,4 +137,12 @@
       </dependency>
   	</dependencies>
   	<groupId>net.sourceforge.jabm</groupId>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
