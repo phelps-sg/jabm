@@ -72,23 +72,23 @@
     <extensions>
 		<extension>
         	<groupId>org.apache.maven.wagon</groupId>
-         	<artifactId>wagon-ftp</artifactId>
-         	<version>1.0-beta-6</version>
+         	<artifactId>wagon-ssh</artifactId>
       	</extension>
     </extensions>
 
   </build>
 
   <distributionManagement>
+  	<downloadUrl>http://jabm.sourceforge.net/mvn-repo/jabm</downloadUrl>
 <!--     <repository> -->
 <!--         <id>internal.repo</id> -->
 <!--         <name>Temporary Staging Repository</name> -->
 <!--         <url>file://${project.build.directory}/mvn-repo</url> -->
 <!--     </repository> -->
 		<repository>
-			<id>sphelps.net.repo</id>
-			<name>Maven repo on sphelps.net via ftp</name>
-			<url>ftp://sphelps.net/public_html/mvn-repo/jabm/</url>
+			<id>jabm.web.sourceforge.net</id>
+			<name>Maven repo on web.sourceforge.net via sftp</name>
+			<url>sftp://web.sourceforge.net/home/project-web/jabm/htdocs/mvn-repo/jabm</url>
 		</repository>
   </distributionManagement>
 
