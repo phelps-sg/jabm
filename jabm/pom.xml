@@ -72,7 +72,7 @@
  <repositories>
     <repository>
         <id>jabm-mvn-repo</id>
-        <url>https://raw.githubusercontent.com/phelps-sg/jabm/mvn-repo/</url>
+	<url>https://raw.githubusercontent.com/phelps-sg/jabm/mvn-repo/</url>
         <snapshots>
             <enabled>true</enabled>
             <updatePolicy>always</updatePolicy>
