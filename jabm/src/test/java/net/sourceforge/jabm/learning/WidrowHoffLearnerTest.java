@@ -13,14 +13,14 @@
  * See the GNU General Public License for more details.
  */
 
-package net.sourceforge.jasa.sim.ai.learning;
+package net.sourceforge.jabm.learning;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import net.sourceforge.jabm.learning.WidrowHoffLearner;
+import net.sourceforge.jabm.test.PRNGTestSeeds;
 import net.sourceforge.jabm.util.MathUtil;
-import net.sourceforge.jasa.sim.PRNGTestSeeds;
 import cern.jet.random.engine.MersenneTwister64;
 import cern.jet.random.engine.RandomEngine;
 

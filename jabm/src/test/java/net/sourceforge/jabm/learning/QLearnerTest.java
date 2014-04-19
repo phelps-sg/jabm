@@ -13,15 +13,15 @@
  * See the GNU General Public License for more details.
  */
 
-package net.sourceforge.jasa.sim.ai.learning;
+package net.sourceforge.jabm.learning;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import net.sourceforge.jabm.learning.EpsilonGreedyActionSelector;
 import net.sourceforge.jabm.learning.QLearner;
+import net.sourceforge.jabm.test.PRNGTestSeeds;
 import net.sourceforge.jabm.util.SummaryStats;
-import net.sourceforge.jasa.sim.PRNGTestSeeds;
 
 import org.apache.log4j.Logger;
 

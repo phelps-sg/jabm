@@ -1,4 +1,4 @@
-package net.sourceforge.jasa.sim.util;
+package net.sourceforge.jabm.test.util;
 
 import junit.framework.TestCase;
 import net.sourceforge.jabm.util.TimeSeriesWindow;

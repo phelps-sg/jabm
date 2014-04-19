@@ -13,7 +13,7 @@
  * See the GNU General Public License for more details.
  */
 
-package net.sourceforge.jasa.sim.util;
+package net.sourceforge.jabm.test.util;
 
 import org.apache.commons.math3.stat.Frequency;
 
@@ -21,9 +21,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import net.sourceforge.jabm.prng.DiscreteProbabilityDistribution;
+import net.sourceforge.jabm.test.PRNGTestSeeds;
 import net.sourceforge.jabm.util.SummaryStats;
-import net.sourceforge.jasa.sim.PRNGTestSeeds;
-
 import cern.jet.random.engine.MersenneTwister64;
 import cern.jet.random.engine.RandomEngine;
 

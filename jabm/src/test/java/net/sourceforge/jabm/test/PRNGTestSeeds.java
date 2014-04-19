@@ -12,7 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-package net.sourceforge.jasa.sim;
+package net.sourceforge.jabm.test;
 
 public class PRNGTestSeeds {
 

@@ -13,7 +13,7 @@
  * See the GNU General Public License for more details.
  */
 
-package net.sourceforge.jasa.sim.util;
+package net.sourceforge.jabm.test.util;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
