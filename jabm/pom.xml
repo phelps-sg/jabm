@@ -68,7 +68,18 @@
 
     </plugins>
   </build>
-  
+
+ <repositories>
+    <repository>
+        <id>jabm-mvn-repo</id>
+        <url>https://raw.githubusercontent.com/phelps-sg/jabm/mvn-repo/</url>
+        <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+        </snapshots>
+    </repository>
+</repositories>  
+
   <distributionManagement>
     <repository>
         <id>internal.repo</id>
