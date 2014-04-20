@@ -4,17 +4,6 @@
   <version>0.9.0-SNAPSHOT</version>
   <groupId>net.sourceforge.jabm</groupId>
   <build>
-
-<!--     <sourceDirectory>config</sourceDirectory> -->
-<!--     <resources> -->
-<!--       <resource> -->
-<!--         <directory>config</directory> -->
-<!--         <excludes> -->
-<!--           <exclude>**/*.java</exclude> -->
-<!--         </excludes> -->
-<!--       </resource> -->
-<!--     </resources> -->
-
     <plugins>
         <plugin>
       		<artifactId>maven-assembly-plugin</artifactId>
