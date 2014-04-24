@@ -131,6 +131,13 @@ public class AgentList implements Serializable {
 		populateFromFactory();
 	}
 	
+	public AgentList(AgentList existing) {
+		this.size  = existing.size;
+		this.agentFactory = existing.agentFactory;
+		this.agents = new ArrayList<Agent>(size);
+		this.agents.addAll(existing.agents);
+	}
+
 	public void populateFromFactory() {
 		agents.clear();
 		for (int i = 0; i < size; i++) {

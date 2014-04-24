@@ -14,6 +14,8 @@
  */
 package net.sourceforge.jabm.evolution;
 
+import java.util.Comparator;
+
 import net.sourceforge.jabm.agent.Agent;
 import net.sourceforge.jabm.agent.AgentList;
 
@@ -55,7 +57,7 @@ public class FitnessProportionateBreeder implements Breeder {
 	public AgentList reproduce(AgentList currentGeneration) {
 		
 		int n = currentGeneration.size();
-		AgentList nextGeneration = currentGeneration;
+		AgentList nextGeneration = new AgentList(currentGeneration);
 		
 		double[] cummulativeFitnesses = cummulativeFitnesses(currentGeneration);
 		
@@ -88,6 +90,11 @@ public class FitnessProportionateBreeder implements Breeder {
 	}
 
 	public double[] cummulativeFitnesses(AgentList agents) {
+		agents.sortAgents(new Comparator<Agent>() {
+			public int compare(Agent o1, Agent o2) {
+				return new Double(getFitness(o1)).compareTo(new Double(getFitness(o2)));
+			}
+		});
 		double[] result = new double[agents.size()];
 		this.totalFitness = 0.0;
 		for(int i=0; i<result.length; i++) {

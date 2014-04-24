@@ -61,7 +61,7 @@ public class EMAFitnessFunction implements FitnessFunction, Report {
     @Override
     public void eventOccurred(SimEvent event) {
         if (event instanceof SimulationStartingEvent) {
-            initialiseFitnesses();
+            initialiseFitnesses((SimulationStartingEvent) event);
         } else if (event instanceof InteractionsFinishedEvent) {
             updateFitnesses();
         }
@@ -75,7 +75,11 @@ public class EMAFitnessFunction implements FitnessFunction, Report {
         }
     }
 
-    protected void initialiseFitnesses() {
+    protected void initialiseFitnesses(SimulationStartingEvent event) {
         this.fitnesses = new HashMap<Agent, Double>();
+        for(Agent agent : event.getSimulation().getPopulation().getAgents()) {
+        	this.fitnesses.put(agent, 0.0);
+        }
+
     }
 }

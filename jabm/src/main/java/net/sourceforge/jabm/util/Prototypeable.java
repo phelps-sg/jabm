@@ -19,7 +19,7 @@ package net.sourceforge.jabm.util;
  * @author Steve Phelps
  * @version $Revision: 16 $
  */
-
+@Deprecated
 public interface Prototypeable extends Cloneable {
 
 	public Object protoClone();
