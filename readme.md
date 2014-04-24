@@ -16,7 +16,7 @@ any attributes (parameters). The Spring configuration file is specified
 using the system property `jabm.config` .
 
 The main application class is
-[`DesktopSimulationManager`](doc/javadoc/net/sourceforge/jabm/DesktopSimulationManager.html).
+[`DesktopSimulationManager`](http://jabm.sourceforge.net/doc/javadoc/net/sourceforge/jabm/DesktopSimulationManager.html)
 
 Prerequisites
 -------------
@@ -25,6 +25,31 @@ JABM requires [Java version 6 or
 later](http://www.java.com/en/download/index.jsp). It has been tested
 against version 1.6.0\_35 and 1.7.0\_51.
 
+Installation
+------------
+
+The project archive can be imported directly into the Eclipse IDE as an existing 
+project.  Alternatively, you can import the project into almost any Java IDE by 
+importing the maven project file `pom.xml`.
+
+In order to add jabm as a dependency to a Maven project, configure the following repository:
+
+	<repositories>
+		<repository>
+			<id>jabm.sourceforge.net</id>
+			<url>http://jabm.sourceforge.net/mvn-repo/jabm</url>
+		</repository>
+	</repositories> 
+
+and then configure a dependency on the jabm artifact; for example:
+
+	<repositories>
+		<repository>
+			<id>jabm.sourceforge.net</id>
+			<url>http://jabm.sourceforge.net/mvn-repo/jabm</url>
+		</repository>
+	</repositories>
+	
 Running the examples
 --------------------
 
