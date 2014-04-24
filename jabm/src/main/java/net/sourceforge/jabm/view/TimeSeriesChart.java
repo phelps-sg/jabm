@@ -105,7 +105,7 @@ public class TimeSeriesChart implements XYDataset, ReportWithGUI, Serializable,
 				true, // tooltips?
 				false // URLs?
 				);
-		chartPanel = new ChartPanel(chart, false);
+		chartPanel = new ChartPanel(chart, true);
 		chartPanel.setPreferredSize(new Dimension(500, 270));
 		computeVariableNames();
 		series.addListener(this);
