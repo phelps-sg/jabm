@@ -43,12 +43,13 @@ In order to add jabm as a dependency to a Maven project, configure the following
 
 and then configure a dependency on the jabm artifact; for example:
 
-	<repositories>
-		<repository>
-			<id>jabm.sourceforge.net</id>
-			<url>http://jabm.sourceforge.net/mvn-repo/jabm</url>
-		</repository>
-	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>net.sourceforge.jabm</groupId>
+			<artifactId>jabm</artifactId>
+			<version>0.9.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 	
 Running the examples
 --------------------
