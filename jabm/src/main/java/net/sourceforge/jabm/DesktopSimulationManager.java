@@ -430,6 +430,7 @@ public class DesktopSimulationManager extends SimulationManager {
 				if (status == JFileChooser.APPROVE_OPTION) {
 					propFile = fc.getSelectedFile().getPath();
 					loadSimulationProperties();
+					propertiesView.restore();
 					propertiesView.restoreFocus();
 				}
 			}
