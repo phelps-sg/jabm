@@ -22,11 +22,14 @@ public class TimeSeriesWindow {
 	
 	protected int windowSize;
 	
-	protected int i = 0;
+	protected int currentIndex = 0;
 	
 	public TimeSeriesWindow(int windowSize) {
 		this.windowSize = windowSize;
 		values = new double[windowSize];
+		for(int i=0; i<windowSize; i++) {
+			values[i] = Double.NaN;
+		}
 	}
 	
 	public int getWindowSize() {
@@ -34,11 +37,11 @@ public class TimeSeriesWindow {
 	}
 	
 	public void addValue(double value) {
-		values[i++ % windowSize] = value;
+		values[currentIndex++ % windowSize] = value;
 	}
 	
 	public double getValue(int lag) {
-		int j = i-1 - lag;
+		int j = currentIndex-1 - lag;
 		int index;
 		if (j < 0) {
 			j = -j;
