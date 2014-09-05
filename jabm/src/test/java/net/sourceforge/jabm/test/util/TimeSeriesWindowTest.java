@@ -12,9 +12,9 @@ public class TimeSeriesWindowTest extends TestCase {
 	}
 	
 	public void testEmpty() {
-		window.addValue(0);
+//		window.addValue(0);
 		for(int i=0; i<15; i++) {
-			assertEquals(0.0, window.getValue(i), 10E-6);
+			assertTrue(Double.isNaN(window.getValue(i)));
 		}
 	}
 	
