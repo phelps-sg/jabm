@@ -23,7 +23,7 @@ Prerequisites
 
 JABM requires [Java version 6 or
 later](http://www.java.com/en/download/index.jsp). It has been tested
-against version 1.6.0\_35 and 1.7.0\_51.
+against version 1.6.0\_35 and 1.7.0\_67.
 
 Installation
 ------------
