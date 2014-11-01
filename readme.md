@@ -23,7 +23,10 @@ Prerequisites
 
 JABM requires [Java version 6 or
 later](http://www.java.com/en/download/index.jsp). It has been tested
-against version 1.6.0\_35 and 1.7.0\_67.
+against version 1.6.0\_35 and 1.7.0\_71.  
+
+Note that on Mac OS, you will need to use the Oracle version of Java instead of 
+the default one shipped with the OS.
 
 Installation
 ------------
@@ -47,34 +50,11 @@ and then configure a dependency on the jabm artifact; for example:
 		<dependency>
 			<groupId>net.sourceforge.jabm</groupId>
 			<artifactId>jabm</artifactId>
-			<version>0.9.0-SNAPSHOT</version>
+			<version>0.9.1</version>
 		</dependency>
 	</dependencies>
 	
-Running the examples
---------------------
-
-### Using Apache Ant
-
-The examples can be run using [Apache Ant](ant.apache.org). Launch a
-command window or shell and set your working directory to the
-`jabm-examples/` subdirectory. Next [run
-ant](http://ant.apache.org/manual/running.html) and pass it the argument
-elfarolbar in order to run the El Farol Bar example. For example:
-
-` ant elfarolbar `
-
-### From the command line
-
-Alternatively, configure the
-[CLASSPATH](http://download.oracle.com/javase/tutorial/essential/environment/paths.html)
-environment variable to include all the `jar` files in the `lib/`
-directory and the `dist/` directory and use a command similar to the
-following:
-
-`java -Djabm.config=config/elfarolbar.xml         net.sourceforge.jabm.DesktopSimulationManager`
-
-### From the Eclipse IDE
+### Running the examples from the Eclipse IDE
 
 The distribution archive can be imported directly into the [Eclipse
 IDE](http://www.eclipse.org/) by using the

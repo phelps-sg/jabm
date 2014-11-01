@@ -1,16 +1,10 @@
-JABM version 0.8
-----------------
+JABM version 0.9.1
+------------------
 
 Main changes since the last release
 -----------------------------------
 
-- repository migrated to github
-- additional javadoc
-- empirical game-theoretic analysis is now implemented by 
-	GameTheoreticSimulationController
-- Population no longer maintains a size attribute; this is handled soley
-	by AgentList
-- updated to latest version of 3rd-party libraries: commons-math 3.2 and Spring 3.2.3
-
+- migrated to Apache Maven for dependency management
+- migrated to Spring framework 4.1.1
 
  

@@ -31,6 +31,6 @@
 	<parent>
 		<groupId>net.sourceforge.jabm</groupId>
 		<artifactId>jabm-with-examples</artifactId>
-		<version>0.9.1-SNAPSHOT</version>
+		<version>0.9.1</version>
 	</parent>
 </project>
