@@ -121,8 +121,8 @@ public abstract class AbstractAgent implements Serializable, Agent {
 	 * agent's strategy.
 	 */
 	public void onAgentArrival(AgentArrivalEvent event) {
-		interacted = true;
 		strategy.execute(event.getObjects());
+		interacted = true;
 	}
 	
 	@Override
