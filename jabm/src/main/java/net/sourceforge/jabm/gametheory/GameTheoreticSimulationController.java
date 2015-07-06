@@ -51,7 +51,7 @@ import org.springframework.beans.factory.annotation.Required;
  * 
  */
 public class GameTheoreticSimulationController extends SpringSimulationController
-		implements Serializable {
+		implements Serializable, AgentInitialiser {
 
 	protected CompressedPayoffMatrix payoffMatrix;
 
@@ -112,11 +112,13 @@ public class GameTheoreticSimulationController extends SpringSimulationControlle
 		exportPayoffPatrix();
 	}
 	
-	@Override
-	protected void constructSimulation() {
-		super.constructSimulation();
-		initialiseAgents(this.currentEntry);
-	}
+//	@Override
+//	protected void constructSimulation() {
+//		super.constructSimulation();
+//		initialiseAgents(this.currentEntry);
+//	}
+//	
+	
 
 	public SummaryStatistics getPayoffDistribution(Strategy strategy) {
 		return payoffByStrategy.getPayoffMap().getPayoffDistribution(strategy);
@@ -132,31 +134,32 @@ public class GameTheoreticSimulationController extends SpringSimulationControlle
 		}
 	}
 
-	public void initialiseAgents(CompressedPayoffMatrix.Entry entry) {
+	public void initialiseAgents(CompressedPayoffMatrix.Entry entry, Population population) {
 		logger.debug("Initialising agents for entry " + entry);
 //		TODO: ?
 //		initialiseAgents();
-		Iterator<Agent> agentIterator = getPopulation()
-				.getAgents().iterator();
+		Iterator<Agent> agentIterator = population.getAgents().iterator();
 		for (int s = 0; s < strategies.size(); s++) {
 			int n = entry.numAgentsPerStrategy[s];
 			if (n == 0) {
 				continue;
 			}
-			Population agents = new Population();
+			Population subPopulation = new Population();
+			subPopulation.setSize(n);
 			for (int i = 0; i < n; i++) {
 				Agent agent = agentIterator.next();
 				Strategy oldStrategy = agent.getStrategy();
 				if (oldStrategy != null) {
-					oldStrategy.setAgent(null);
-					agent.setStrategy(null);
+					//TODO: Check this!
+//					oldStrategy.setAgent(null);
+//					agent.setStrategy(null);
 				}
-				agents.add(agent);
+				subPopulation.add(agent);
 			}
 			AgentInitialiser initialiser = strategyInitialisers.get(s);
 			if (logger.isDebugEnabled())
-				logger.debug("Initialising " + agents + " with strategy " + s);
-			initialiser.initialise(agents);
+				logger.debug("Initialising " + subPopulation + " with strategy " + s);
+			initialiser.initialise(subPopulation);
 		}
 	}
 
@@ -257,5 +260,10 @@ public class GameTheoreticSimulationController extends SpringSimulationControlle
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		initialise();
+	}
+
+	@Override
+	public void initialise(Population population) {
+		initialiseAgents(this.currentEntry, population);
 	}
 }
