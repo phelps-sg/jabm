@@ -74,8 +74,10 @@ public class RlStrategy extends AbstractRlStrategy
 
 	public void execute(List<Agent> otherAgents) {		
 		assert this.agent != null;
-		double reward = agent.getPayoffDelta();
-		learner.reward(reward);
+		if (agent.isInteracted()) {
+			double reward = agent.getPayoffDelta();
+			learner.reward(reward);
+		}
 		int action = learner.act();
 		currentStrategy = actions[action];
 		assert currentStrategy.getAgent() != null;
