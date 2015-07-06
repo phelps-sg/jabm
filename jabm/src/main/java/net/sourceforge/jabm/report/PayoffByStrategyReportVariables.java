@@ -45,12 +45,24 @@ public class PayoffByStrategyReportVariables extends AbstractReportVariables
 		while (agents.hasNext()) {
 			Agent agent = agents.next();
 			if (agent.isInteracted()) {
-				Strategy strategy = agent.getStrategy();
-				double fitness = agent.getPayoff();
-				payoffMap.updatePayoff(strategy, fitness);
+				double fitness = getPayoff(agent);
+				Strategy strategy = getStrategy(agent);
+				updatePayoff(strategy, fitness);
 			}
 		}
 		fireEvent(new ReportVariablesChangedEvent(this));
+	}
+	
+	public Strategy getStrategy(Agent agent) {
+		return agent.getStrategy();
+	}
+	
+	public void updatePayoff(Strategy strategy, double fitness) {
+		payoffMap.updatePayoff(strategy, fitness);
+	}
+	
+	public double getPayoff(Agent agent) {
+		return agent.getPayoff();
 	}
 	
 	public Map<Object,Number> getVariableBindings() {
