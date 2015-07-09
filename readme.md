@@ -22,7 +22,7 @@ Prerequisites
 
 JABM requires [Java version 6 or
 later](http://www.java.com/en/download/index.jsp). It has been tested
-against version 1.6.0\_35 and 1.7.0\_71.  
+against version 1.6.0\_35 and 1.7.0\_75.  
 
 Note that on Mac OS, you will need to use the Oracle version of Java instead of 
 the default one shipped with the OS.
