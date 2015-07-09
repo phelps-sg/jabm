@@ -1,6 +1,6 @@
 /*
  * JABM - Java Agent-Based Modeling Toolkit
- * Copyright (C) 2013 Steve Phelps
+ * Copyright (C) 2015 Steve Phelps
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,7 +15,6 @@
 package net.sourceforge.jabm.report;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.Map;
 
 import net.sourceforge.jabm.Population;
@@ -41,9 +40,7 @@ public class PayoffByStrategyReportVariables extends AbstractReportVariables
 		SimulationController controller = event.getSimulation()
 				.getSimulationController();
 		Population population = controller.getPopulation();
-		Iterator<Agent> agents = population.getAgentList().iterator();
-		while (agents.hasNext()) {
-			Agent agent = agents.next();
+		for (Agent agent : population.getAgentList().getAgents()) {
 			if (agent.isInteracted()) {
 				double fitness = getPayoff(agent);
 				Strategy strategy = getStrategy(agent);
@@ -67,9 +64,7 @@ public class PayoffByStrategyReportVariables extends AbstractReportVariables
 	
 	public Map<Object,Number> getVariableBindings() {
 		Map<Object,Number> result = super.getVariableBindings();
-		Iterator<Strategy> i = payoffMap.getStrategies().iterator();
-		while (i.hasNext()) {
-			Strategy strategy = i.next();
+		for(Strategy strategy : payoffMap.getStrategies()) {
 			double meanPayoff = payoffMap.getMeanPayoff(strategy);
 			result.put("payoff." + strategy, meanPayoff);
 		}
@@ -95,7 +90,6 @@ public class PayoffByStrategyReportVariables extends AbstractReportVariables
 	
 	public void initialise() {
 		payoffMap.initialise();
-//		payoffMap = new PayoffMap();
 	}
 
 }
