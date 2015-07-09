@@ -15,51 +15,47 @@
 package net.sourceforge.jabm.report;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 import net.sourceforge.jabm.strategy.Strategy;
 
+import org.apache.commons.math3.stat.descriptive.StatisticalSummary;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 
 public class PayoffMap implements Serializable, Cloneable {
 
-	protected LinkedHashMap<Strategy, SummaryStatistics> payoffs 
-		= new LinkedHashMap<Strategy, SummaryStatistics>();
+	protected LinkedHashMap<Strategy, StatisticalSummary> payoffs
+		= new LinkedHashMap<Strategy, StatisticalSummary>();
 
 	protected Vector<Strategy> strategyIndex = new Vector<Strategy>();
 
+	protected List<Strategy> strategies;
+
 	public PayoffMap() {
+		this(new LinkedList<Strategy>());
 	}
 	
-	public PayoffMap(List<Strategy> strategies,
-			ObjectFactory<SummaryStatistics> summaryStatisticsFactory) {
-		super();
-		for(Strategy strategy : strategies) {
-			payoffs.put(strategy, summaryStatisticsFactory.getObject());
-			strategyIndex.add(strategy);
-		}
-	}
-
 	public PayoffMap(List<Strategy> strategies) {
-		this(strategies, new ObjectFactory<SummaryStatistics>() {
-			@Override
-			public SummaryStatistics getObject() throws BeansException {
-				return new SummaryStatistics();
-			}
-		});
-	}
+		this.strategies = strategies;
+		initialise();
+    }
 
-	public void updatePayoff(Strategy strategy, double fitness) {
-		SummaryStatistics stats = payoffs.get(strategy);
-		if (stats == null) {
-			stats = new SummaryStatistics();
-			payoffs.put(strategy, stats);
+    public void initialise() {
+		payoffs = new LinkedHashMap<Strategy, StatisticalSummary>();
+		strategyIndex = new Vector<Strategy>();
+        for(Strategy strategy : strategies) {
+			strategyIndex.add(strategy);
+            payoffs.put(strategy, createStatisticalSummary(strategy) );
+        }
+    }
+
+    public void updatePayoff(Strategy strategy, double fitness) {
+		SummaryStatistics stats = (SummaryStatistics) payoffs.get(strategy);
+        if (stats == null) {
+            stats = (SummaryStatistics) createStatisticalSummary(strategy);
+            payoffs.put(strategy, stats);
 			strategyIndex.add(strategy);
 		}
 		stats.addValue(fitness);
@@ -73,11 +69,11 @@ public class PayoffMap implements Serializable, Cloneable {
 		return payoffs.get(strategy).getMean();
 	}
 
-	public SummaryStatistics getPayoffDistribution(Strategy strategy) {
+	public StatisticalSummary getPayoffDistribution(Strategy strategy) {
 		return payoffs.get(strategy);
 	}
-	
-	public SummaryStatistics getPayoffDistribution(int i) {
+
+	public StatisticalSummary getPayoffDistribution(int i) {
 		return getPayoffDistribution(strategyIndex.get(i));
 	}
 	
@@ -86,7 +82,7 @@ public class PayoffMap implements Serializable, Cloneable {
 	}
 
 	public String toString() {
-		StringBuffer result = new StringBuffer("[");
+		StringBuilder result = new StringBuilder("[");
 		Iterator<Strategy> i = payoffs.keySet().iterator();
 		while (i.hasNext()) {
 			Strategy s = i.next();
@@ -108,20 +104,14 @@ public class PayoffMap implements Serializable, Cloneable {
 	@SuppressWarnings("unchecked")
 	public Object clone() throws CloneNotSupportedException {
 		PayoffMap result = (PayoffMap) super.clone();
-		result.payoffs = (LinkedHashMap<Strategy, SummaryStatistics>) this.payoffs
+		result.payoffs = (LinkedHashMap<Strategy, StatisticalSummary>) this.payoffs
 				.clone();
 		result.strategyIndex = (Vector<Strategy>) this.strategyIndex.clone();
 		return result;
 	}
 
-	public void initialise() {
-		for(Strategy s : strategyIndex) {
-			payoffs.put(s, new SummaryStatistics());
-		}
-		
+	public StatisticalSummary createStatisticalSummary(Strategy s) {
+		return new SummaryStatistics();
 	}
 	
-	// public String toString() {
-	// return payoffs.toString();
-	// }
 }

@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import net.sourceforge.jabm.report.AggregatePayoffMap;
 import net.sourceforge.jabm.report.DataWriter;
 import net.sourceforge.jabm.report.PayoffMap;
 import net.sourceforge.jabm.strategy.Strategy;
@@ -31,6 +32,7 @@ import net.sourceforge.jabm.util.BaseNIterator;
 import net.sourceforge.jabm.util.MathUtil;
 import net.sourceforge.jabm.util.Partitioner;
 
+import org.apache.commons.math3.stat.descriptive.StatisticalSummary;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.log4j.Logger;
 
@@ -72,8 +74,8 @@ public class CompressedPayoffMatrix  implements Serializable {
 		matrix = new HashMap<Entry,PayoffMap>();
 		OrderedEntryIterator i = new OrderedEntryIterator();
 		while (i.hasNext()) {
-			Entry e = (Entry) i.next();
-			matrix.put(e, new PayoffMap(strategies));
+			Entry e = i.next();
+			matrix.put(e, new AggregatePayoffMap(strategies));
 		}
 	}
 
@@ -90,9 +92,9 @@ public class CompressedPayoffMatrix  implements Serializable {
 		return matrix.get(entry);
 	}
 
-	public void setCompressedPayoffs(Entry entry, PayoffMap compressedPayoffs) {
-		matrix.put(entry, compressedPayoffs);
-	}
+//	public void updateWithPayoffs(Entry entry, PayoffMap compressedPayoffs) {
+//        //TODO
+//	}
 //
 //	public void reset() {
 //		Iterator<Entry> i = compressedEntryIterator();
@@ -122,7 +124,7 @@ public class CompressedPayoffMatrix  implements Serializable {
 			}
 
 			public FullEntry next() {
-				return new FullEntry((int[]) b.next(), matrix);
+				return new FullEntry(b.next(), matrix);
 			}
 
 			public void remove() {
@@ -207,13 +209,13 @@ public class CompressedPayoffMatrix  implements Serializable {
 	public void export(DataWriter out) {
 		Iterator<Entry> entries = orderedEntryIterator();
 		while (entries.hasNext()) {
-			Entry entry = (Entry) entries.next();
+			Entry entry = entries.next();
 			for (int s = 0; s < numStrategies; s++) {
 				out.newData(entry.getNumAgents(s));
 			}
 			PayoffMap payoffs = getCompressedPayoffs(entry);
 			for (int i = 0; i < payoffs.size(); i++) {
-				SummaryStatistics payoffStats = payoffs
+				StatisticalSummary payoffStats = payoffs
 						.getPayoffDistribution(i);
 				out.newData(payoffStats.getMean());
 				out.newData(payoffStats.getStandardDeviation());
@@ -339,7 +341,7 @@ public class CompressedPayoffMatrix  implements Serializable {
 			int strategy = 0;
 			for (int i = 0; i < numRoles; i++) {
 				for (int s = 0; s < numStrategiesPerRole[i]; s++) {
-					entry[strategy++] = ((int[]) state.get(i))[s];
+					entry[strategy++] = state.get(i)[s];
 				}
 			}
 			return new Entry(entry);
@@ -350,11 +352,11 @@ public class CompressedPayoffMatrix  implements Serializable {
 
 		protected void nextState(int role) {
 			if (p[role].hasNext()) {
-				state.set(role, (int[]) p[role].next());
+				state.set(role, p[role].next());
 			} else {
 				p[role] = new Partitioner(numPlayersPerRole[role],
 				    numStrategiesPerRole[role]);
-				state.set(role, (int[]) p[role].next());
+				state.set(role, p[role].next());
 				if (role > 0) {
 					nextState(role - 1);
 				}
@@ -377,7 +379,7 @@ public class CompressedPayoffMatrix  implements Serializable {
 
 		public Object clone() throws CloneNotSupportedException {
 			Entry newEntry = (Entry) super.clone();
-			newEntry.numAgentsPerStrategy = (int[]) this.numAgentsPerStrategy.clone();
+			newEntry.numAgentsPerStrategy = this.numAgentsPerStrategy.clone();
 			return newEntry;
 		}
 
@@ -394,7 +396,7 @@ public class CompressedPayoffMatrix  implements Serializable {
 		}
 
 		public String toString() {
-			StringBuffer result = new StringBuffer("");
+			StringBuilder result = new StringBuilder("");
 			int numStrategies = numAgentsPerStrategy.length;
 			for (int i = 0; i < numStrategies - 1; i++) {
 				result.append(numAgentsPerStrategy[i] + "/");
@@ -463,54 +465,5 @@ public class CompressedPayoffMatrix  implements Serializable {
 		}
 
 	}
-//
-//	//TODO: Can this be replaced by PayoffMap?
-//	public static class PayoffVector implements Serializable {
-//
-//		protected SummaryStatistics[] payoffs;
-//
-//		public PayoffVector(int size) {
-//			initialise(size);
-//		}
-//		
-//		public void initialise(int size) {
-//			payoffs = new SummaryStatistics[size];
-//			for(int i=0; i<size; i++) {
-//				payoffs[i] = new SummaryStatistics();
-//			}
-//		}
-//		
-//		public int size() {
-//			return payoffs.length;
-//		}
-//
-//		public SummaryStatistics[] getPayoffs() {
-//			return payoffs;
-//		}
-//
-//		public SummaryStatistics getPayoff(int strategy) {
-//			return payoffs[strategy];
-//		}
-//		
-//		public void setPayoff(int strategy, SummaryStatistics payoff) {
-//			payoffs[strategy] = payoff;
-//		}
-//
-//		public void recordPayoff(int strategy, double payoff) {
-//			payoffs[strategy].addValue(payoff);
-//		}
-//		
-//		public void recordPayoff(int strategy, SummaryStatistics payoff) {
-//			throw new RuntimeException("Not implemented!");
-//			payoffs[strategy].
-//			payoffs[strategy].aggregate(payoff);
-//			//TODO
-//		}
-//		
-//		public void reset() {
-//			int n = payoffs.length;
-//			initialise(n);
-//		}
-//	}
 
 }

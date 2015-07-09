@@ -19,13 +19,12 @@ public class PayoffMapTest extends TestCase {
     Strategy strategy2;
 
     public void setUp() {
-        payoffs = new PayoffMap();
         strategy1 = new MockStrategy("strategy1");
         strategy2 = new MockStrategy("strategy2");
         LinkedList<Strategy> strategies = new LinkedList<Strategy>();
         strategies.add(strategy1);
         strategies.add(strategy2);
-        payoffs.initialisePayoffs(strategies);
+        payoffs = new PayoffMap(strategies);
     }
 
     public void testUpdatePayoff() throws Exception {

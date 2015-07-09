@@ -28,13 +28,11 @@ import net.sourceforge.jabm.SpringSimulationController;
 import net.sourceforge.jabm.agent.Agent;
 import net.sourceforge.jabm.init.AgentInitialiser;
 import net.sourceforge.jabm.init.StrategyInitialiser;
-import net.sourceforge.jabm.report.CSVWriter;
-import net.sourceforge.jabm.report.PayoffByStrategyReportVariables;
-import net.sourceforge.jabm.report.PayoffMap;
+import net.sourceforge.jabm.report.*;
 import net.sourceforge.jabm.strategy.Strategy;
 import net.sourceforge.jabm.util.MutableStringWrapper;
 
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+import org.apache.commons.math3.stat.descriptive.StatisticalSummary;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Required;
@@ -103,9 +101,11 @@ public class GameTheoreticSimulationController extends SpringSimulationControlle
 		while (i.hasNext()) {
 			this.currentEntry = i.next();
 			logger.info("Computing payoffs for " + this.currentEntry);
-			this.payoffByStrategy.setPayoffMap(new PayoffMap(strategies));
+			AggregatePayoffMap aggregatePayoffs = (AggregatePayoffMap) payoffMatrix.getCompressedPayoffs(currentEntry);
+			payoffByStrategy.setPayoffMap(new ContributingPayoffMap(aggregatePayoffs,  strategies));
+			payoffByStrategy.initialise();
 			super.run();
-			updatePayoffs(this.currentEntry);
+//			updatePayoffs(this.currentEntry);
 			logger.info("done.");
 		}
 		logger.info("completed payoff matrix.");
@@ -118,21 +118,18 @@ public class GameTheoreticSimulationController extends SpringSimulationControlle
 //		initialiseAgents(this.currentEntry);
 //	}
 //	
-	
-
-	public SummaryStatistics getPayoffDistribution(Strategy strategy) {
+	public StatisticalSummary getPayoffDistribution(Strategy strategy) {
 		return payoffByStrategy.getPayoffMap().getPayoffDistribution(strategy);
 	}
 
-	public void updatePayoffs(CompressedPayoffMatrix.Entry entry) {
-		try {
-			PayoffMap payoffs = payoffByStrategy.getPayoffMap();
-			payoffMatrix.setCompressedPayoffs(entry,
-					(PayoffMap) payoffs.clone());
-		} catch (CloneNotSupportedException e) {
-			throw new RuntimeException(e);
-		}
-	}
+//	public void updatePayoffs(CompressedPayoffMatrix.Entry entry) {
+//		try {
+//			PayoffMap payoffs = payoffByStrategy.getPayoffMap();
+//			payoffMatrix.updateWithPayoffs(entry, payoffs);
+//		} catch (CloneNotSupportedException e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
 
 	public void initialiseAgents(CompressedPayoffMatrix.Entry entry, Population population) {
 		logger.debug("Initialising agents for entry " + entry);
