@@ -1,7 +1,6 @@
-JABM - Java Agent-Based Modelling toolkit 
-=========================================
+# JABM - Java Agent-Based Modelling toolkit 
 
-\(C) 2014 [Steve Phelps](http://sphelps.net/)   
+\(C) 2015 [Steve Phelps](http://sphelps.net/)   
 
 Overview
 --------
