@@ -62,7 +62,7 @@ public class PayoffByStrategyReportVariables extends AbstractReportVariables
 		return agent.getPayoff();
 	}
 	
-	public Map<Object,Number> getVariableBindings() {
+	public Map<Object, Number> getVariableBindings() {
         Map<Object, Number> result = super.getVariableBindings();
         for (Strategy strategy : payoffMap.getStrategies()) {
             double meanPayoff = payoffMap.getMeanPayoff(strategy);
