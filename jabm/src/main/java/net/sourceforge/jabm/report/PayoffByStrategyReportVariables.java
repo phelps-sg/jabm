@@ -63,13 +63,13 @@ public class PayoffByStrategyReportVariables extends AbstractReportVariables
 	}
 	
 	public Map<Object,Number> getVariableBindings() {
-		Map<Object,Number> result = super.getVariableBindings();
-		for(Strategy strategy : payoffMap.getStrategies()) {
-			double meanPayoff = payoffMap.getMeanPayoff(strategy);
-			result.put("payoff." + strategy, meanPayoff);
-		}
-		return result;
-	}
+        Map<Object, Number> result = super.getVariableBindings();
+        for (Strategy strategy : payoffMap.getStrategies()) {
+            double meanPayoff = payoffMap.getMeanPayoff(strategy);
+            result.put("payoff." + strategy, meanPayoff);
+        }
+        return result;
+    }
 	
 	public PayoffMap getPayoffMap() {
 		return payoffMap;
