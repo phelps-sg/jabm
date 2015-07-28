@@ -16,11 +16,11 @@ package net.sourceforge.jabm;
 
 public class Version {
 
-	public static final String VERSION_NUMBER = "0.9.0-SNAPSHOT";
+	public static final String VERSION_NUMBER = "0.9.2-SNAPSHOT";
 	public static final String VERSION_SUFFIX = "b";
 	public static final String BUILD_NUMBER = "1";
-	public static final String BUILD_DATE = "20130615";
-	public static final String COPYRIGHT = "(C) 2014 Steve Phelps";
+	public static final String BUILD_DATE = "20150715";
+	public static final String COPYRIGHT = "(C) 2015 Steve Phelps";
 	
 	public static String getVersion() {
 		return VERSION_NUMBER + VERSION_SUFFIX;

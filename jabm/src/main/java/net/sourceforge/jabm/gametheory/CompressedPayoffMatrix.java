@@ -399,7 +399,7 @@ public class CompressedPayoffMatrix  implements Serializable {
 			StringBuilder result = new StringBuilder("");
 			int numStrategies = numAgentsPerStrategy.length;
 			for (int i = 0; i < numStrategies - 1; i++) {
-				result.append(numAgentsPerStrategy[i] + "/");
+				result.append(numAgentsPerStrategy[i]).append("/");
 			}
 			result.append(numAgentsPerStrategy[numStrategies - 1]);
 			return result.toString();

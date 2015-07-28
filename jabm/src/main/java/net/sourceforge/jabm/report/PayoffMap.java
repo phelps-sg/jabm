@@ -24,6 +24,7 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 
+@SuppressWarnings("StringConcatenationInsideStringBufferAppend")
 public class PayoffMap implements Serializable, Cloneable {
 
 	protected LinkedHashMap<Strategy, StatisticalSummary> payoffs
@@ -87,7 +88,7 @@ public class PayoffMap implements Serializable, Cloneable {
 		while (i.hasNext()) {
 			Strategy s = i.next();
 			double meanPayoff = getMeanPayoff(s);
-			result.append(s + "=" + meanPayoff);
+			result.append(s).append("=").append(meanPayoff);
 			if (i.hasNext()) {
 				result.append(" ");
 			}

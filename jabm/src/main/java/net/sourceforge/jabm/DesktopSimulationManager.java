@@ -37,22 +37,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTextArea;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -276,7 +261,7 @@ public class DesktopSimulationManager extends SimulationManager {
 		menuBar.add(createHelpMenu());
 		
 		desktopFrame.setJMenuBar(menuBar);
-		desktopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		desktopFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		desktopFrame.addWindowListener(new SaveLayoutOnExitWindowListener());
 		desktopFrame.setVisible(true);
 	}

@@ -28,7 +28,7 @@ import net.sourceforge.jabm.event.EventListener;
  * them to collect summary statistics across different simulation runs.
  * </p>
  * 
- * @see net.sourceforge.jabm.report.ReportVariables.
+ * @see net.sourceforge.jabm.report.ReportVariables
  * 
  * @author Steve Phelps
  * 
@@ -41,7 +41,7 @@ public interface Report extends EventListener {
 	 * @return A {@link Map} of user-readable variable names to their
 	 *         associated values.
 	 */
-	public Map<Object,Number> getVariableBindings();
+	public Map<Object, Number> getVariableBindings();
 
 	public String getName();
 	
