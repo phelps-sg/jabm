@@ -55,7 +55,9 @@ public class PayoffByStrategyReportVariables extends AbstractReportVariables
 	}
 	
 	public void updatePayoff(Strategy strategy, double fitness) {
-		payoffMap.updatePayoff(strategy, fitness);
+		if (!Double.isInfinite(fitness) & !Double.isNaN(fitness)) { //TODO Configurable?
+			payoffMap.updatePayoff(strategy, fitness);
+		}
 	}
 	
 	public double getPayoff(Agent agent) {
