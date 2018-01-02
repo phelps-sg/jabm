@@ -40,6 +40,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <doclint>None</doclint>
+                    <!--<additionalparam>-Xdoclint:none</additionalparam>-->
+				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -190,16 +194,16 @@
 			<artifactId>jung-io</artifactId>
 			<version>2.0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-core_2.10</artifactId>
-			<version>1.4.0</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.spark</groupId>-->
+			<!--<artifactId>spark-core_2.10</artifactId>-->
+			<!--<version>1.4.0</version>-->
+		<!--</dependency>-->
 	</dependencies>
 
 	<parent>
 		<groupId>net.sourceforge.jabm</groupId>
 		<artifactId>jabm-with-examples</artifactId>
-		<version>0.9.2-SNAPSHOT</version>
+		<version>0.9.3-SNAPSHOT</version>
 	</parent>
 </project>
