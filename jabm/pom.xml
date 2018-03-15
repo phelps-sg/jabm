@@ -10,10 +10,47 @@
 	<artifactId>jabm</artifactId>
 	<name>jabm</name>
 	<description>Java Agent-Based Modelling Toolkit</description>
+	<url>https://jabm.sourceforge.net/</url>
+
+	<licenses>
+		<license>
+			<name>GNU GPL v2</name>
+			<url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Steve Phelps</name>
+			<email>sphelps@sphelps.net</email>
+			<organizationUrl>http://sphelps.net/</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/phelps-sg/jabm.git</connection>
+		<developerConnection>scm:git:ssh://github.com:phelps-sg/jabm.git</developerConnection>
+		<url>https://github.com/phelps-sg/jabm/tree/master</url>
+	</scm>
 
 	<build>
 
 		<plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -218,6 +255,6 @@
 	<parent>
 		<groupId>net.sourceforge.jabm</groupId>
 		<artifactId>jabm-with-examples</artifactId>
-		<version>0.9.3-SNAPSHOT</version>
+		<version>0.9.5</version>
 	</parent>
 </project>
