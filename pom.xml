@@ -6,7 +6,7 @@
 	<groupId>net.sourceforge.jabm</groupId>
 	<artifactId>jabm-with-examples</artifactId>
 	<packaging>pom</packaging>
-	<version>0.9.5</version>
+	<version>0.9.6</version>
 	<name>jabm-with-examples</name>
 	<url>https://jabm.sourceforge.net/</url>
 
