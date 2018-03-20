@@ -9,7 +9,7 @@
 
     <groupId>net.sourceforge.jabm</groupId>
 	<artifactId>jabm</artifactId>
-    <version>0.9.7</version>
+    <version>0.9.8</version>
 	<name>jabm</name>
 	<description>Java Agent-Based Modelling Toolkit</description>
 	<url>https://jabm.sourceforge.net/</url>
@@ -122,42 +122,7 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-resources-plugin</artifactId> -->
-<!-- 				<version>2.4</version> -->
-<!-- 				<configuration> -->
-<!-- 					specify UTF-8, ISO-8859-1 or any other file encoding -->
-<!-- 					<encoding>UTF-8</encoding> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-
-			<!-- <plugin> -->
-			<!-- <groupId>com.google.code.maven-replacer-plugin</groupId> -->
-			<!-- <artifactId>replacer</artifactId> -->
-			<!-- <version>1.5.3</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>prepare-package</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>replace</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- <configuration> -->
-			<!-- <token>$VERSION$</token> -->
-			<!-- <value>${project.version}</value> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
-
 		</plugins>
-
-<!-- 		<resources> -->
-<!-- 			<resource> -->
-<!-- 				<targetPath>src/main/java/net/sourceforge/jabm/Version.java</targetPath> -->
-<!-- 				<filtering>true</filtering> -->
-<!-- 			</resource> -->
-<!-- 		</resources> -->
 	</build>
 
 	<distributionManagement>
@@ -170,6 +135,17 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
 	</distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>programmers-friend</id>
+            <url>http://programmers-friend.org/maven/repo/</url>
+        </repository>
+        <repository>
+            <id>jabm</id>
+            <url>http://jabm.sourceforge.net/mvn-repo/jabm/</url>
+        </repository>
+    </repositories>
 
 	<dependencies>
 		<dependency>
@@ -218,9 +194,9 @@
 			<version>1.6.1</version>
 		</dependency>
 		<dependency>
-			<groupId>programmers-friend</groupId>
+			<groupId>org.pfsw</groupId>
 			<artifactId>pf-joi</artifactId>
-			<version>3.0</version>
+			<version>4.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
