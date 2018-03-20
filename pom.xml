@@ -132,6 +132,10 @@
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
+		<repository>
+			<id>programmers-friend</id>
+            <url></url>
+		</repository>
 	</distributionManagement>
 
 
