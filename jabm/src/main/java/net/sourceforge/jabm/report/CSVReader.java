@@ -30,20 +30,20 @@ public class CSVReader implements Serializable {
 	
 	transient BufferedReader in;
 
-	char seperator;
+  char separator;
 
 	Class[] types;
 
-	static final char DEFAULT_SEPERATOR = '\t';
+  static final char DEFAULT_SEPARATOR = '\t';
 
-	public CSVReader(InputStream in, Class[] types, char seperator) {
+  public CSVReader(InputStream in, Class[] types, char separator) {
 		this.in = new BufferedReader(new InputStreamReader(in));
-		this.seperator = seperator;
+    this.separator = separator;
 		this.types = types;
 	}
 
 	public CSVReader(InputStream in, Class[] types) {
-		this(in, types, DEFAULT_SEPERATOR);
+    this(in, types, DEFAULT_SEPARATOR);
 	}
 
 	public List nextRecord() throws IOException {
@@ -52,7 +52,7 @@ public class CSVReader implements Serializable {
 		if (line == null) {
 			return null;
 		}
-		StringTokenizer tokens = new StringTokenizer(line, seperator + "");
+    StringTokenizer tokens = new StringTokenizer(line, separator + "");
 		for (int i = 0; i < types.length; i++) {
 			String fieldStr = tokens.nextToken();
 			record.add(convert(fieldStr, types[i]));

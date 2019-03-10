@@ -41,32 +41,32 @@ public class CSVWriter implements Serializable, DataWriter {
 
 	protected int currentColumn = 0;
 
-	protected char seperator = DEFAULT_SEPERATOR;
+  protected char separator = DEFAULT_SEPARATOR;
 
 	protected boolean append = true;
 
-	static final char DEFAULT_SEPERATOR = '\t';
+  static final char DEFAULT_SEPARATOR = '\t';
 
 	static Logger logger = Logger.getLogger(CSVWriter.class);
 
-	public CSVWriter(OutputStream out, int numColumns, char seperator) {
+  public CSVWriter(OutputStream out, int numColumns, char separator) {
 		this.out = new PrintStream(new BufferedOutputStream(out));
 		this.numColumns = numColumns;
-		this.seperator = seperator;
+    this.separator = separator;
 	}
 
-	public CSVWriter(OutputStream out, char seperator) {
+  public CSVWriter(OutputStream out, char separator) {
 		this.out = new PrintStream(new BufferedOutputStream(out));
 		this.autowrap = false;
-		this.seperator = seperator;
+    this.separator = separator;
 	}
 
 	public CSVWriter(OutputStream out, int numColumns) {
-		this(out, numColumns, DEFAULT_SEPERATOR);
+    this(out, numColumns, DEFAULT_SEPARATOR);
 	}
 
 	public CSVWriter(OutputStream out) {
-		this(out, DEFAULT_SEPERATOR);
+    this(out, DEFAULT_SEPARATOR);
 	}
 
 	public CSVWriter() {
@@ -196,22 +196,21 @@ public class CSVWriter implements Serializable, DataWriter {
 
 	public void setNumColumns(int numColumns) {
 		if (!autowrap)
-			new Error(
-			    "The number of columns should NOT be set when autowrap is disabled.");
+      new Error("The number of columns should NOT be set when autowrap is disabled.");
 		this.numColumns = numColumns;
 	}
 
 	protected void prepareColumn() {
 		if (!autowrap)
 			if (currentColumn > 0)
-				out.print(seperator);
+        out.print(separator);
 	}
 
 	protected void nextColumn() {
 		currentColumn++;
 		if (autowrap)
 			if (currentColumn < numColumns) {
-				out.print(seperator);
+        out.print(separator);
 			} else {
 				newLine();
 			}

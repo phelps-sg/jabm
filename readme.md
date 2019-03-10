@@ -52,6 +52,28 @@ and then configure a dependency on the jabm artifact; for example:
 			<version>0.9.1</version>
 		</dependency>
 	</dependencies>
+
+
+### Installation using Gradle
+
+If you use gradle to build your project, you have to include the following snippets in your `build.gradle`:
+
+```
+dependencies {
+   implementation 'net.sourceforge.jabm:jabm:0.9.9'
+}
+```
+
+as well as specify the repository as:
+
+```
+repositories {
+    mavenCentral()
+    maven {
+       url = "http://jabm.sourceforge.net/mvn-repo/jabm"
+    }
+}
+```
 	
 ### Running the examples from the Eclipse IDE
 
